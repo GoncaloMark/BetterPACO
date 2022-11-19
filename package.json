@@ -3,8 +3,7 @@
   "version": "1.0.0",
   "description": "PACO-UA extensão que deixa essa coisa minimamente agradável",
   "scripts": {
-    "build:tailwind": "npx postcss src/main.css -o dist/main.css",
-    "build:dist": "npx tsc",
+    "build": "npx tsc && npx postcss src/main.css -o dist/main.css",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [

@@ -1,12 +1,24 @@
 const body = document.body as HTMLBodyElement;
+const info = body.querySelectorAll('div[class="info"]')[1] as HTMLElement;
+body.className = `bg-sky-100`;
+const arrInfo: NodeListOf<HTMLElement> = info.querySelectorAll('div[class="alert"]');
 const childLink = document.getElementsByName("topo")[0] as HTMLLinkElement;
-
+console.log(arrInfo[0]);
 //Let's delete the whole body
-body.removeChild(childLink)
+body.removeChild(childLink);
 
 //Let's start building
 const header = document.createElement("header");
+const footer = document.createElement("footer");
+footer.className= `container-fluid w-full flex flex-wrap items-center px-6 h-fit bg-blue-600 justify-left`;
 const nav = document.createElement("nav");
+const section = document.createElement("section");
+const article = document.createElement("article");
+const heading = document.createElement("h1");
+heading.textContent = `Avisos!`;
+heading.className = `text-slate-700 text-2xl bold mb-5`;
+
+//NAV
 nav.setAttribute("style", 
 `relative
 w-full
@@ -19,8 +31,6 @@ hover:text-gray-700
 focus:text-gray-700
 shadow-lg
 navbar navbar-expand-lg navbar-light`)
-
-
 nav.innerHTML = `
 <div class="container-fluid w-full flex flex-wrap items-center px-6 h-16 bg-blue-600 justify-between">
   <div class="relative flex items-center ">
@@ -86,32 +96,163 @@ nav.innerHTML = `
       </div>
 
       <ul class="flex items-center space-x-8 text-white">
-          <li class="font-medium hover:font-bold">
-            <a href="/secvirtual">
+          <li class="font-medium hover:font-bold p-4">
+            <a href="/secvirtual" class"mr-4">
               Secretaria Virtual
             </a>
           </li>
 
-          <li class="font-medium hover:font-bold dropdown">
-            <a>
+          <li class="relative font-medium hover:font-bold dropdown flex items-center p-4" name = "estudante">
+            <a class="mr-4">
               Estudante
-            </a>
+            </a> 
+            <svg class="inline w-6 h-6 text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+            </svg>
+
+            <div x-show="open" x-transition:enter.duration.500ms="" x-transition:leave.duration.800ms="" class="absolute w-48 py-2 mt-2 right-0 top-10 bg-gray-100 rounded-md shadow-xl" name = "listEstudante" style="display: none";>
+                    <a href="/matriculas/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-400 hover:text-white">
+                        Matrículas Online
+                    </a>
+                    <a href="https://paco.ua.pt/Candidaturas" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-400 hover:text-white">
+                        Candidaturas
+                    </a>
+                    <a href="/M23/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-400 hover:text-white">
+                        Candidaturas M23
+                    </a>
+                    <a href="/M23TESP/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-400 hover:text-white">
+                    Candidaturas M23 - TESP
+                    </a>
+
+                    <a href="/CandidaturasUA/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-400 hover:text-white">
+                    Candidaturas Cursos Livres
+                    </a>
+                </div>
           </li>
 
-          <li class="font-medium hover:font-bold">
-            <a>
+          <li class="relative font-medium hover:font-bold dropdown flex items-center p-4" name="docente">
+            <a class="mr-4">
               Docente
+            </a> 
+            
+            <svg class="inline w-6 h-6 text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+            </svg>
+
+            <div x-show="open" x-transition:enter.duration.500ms="" x-transition:leave.duration.800ms="" class="absolute w-48 py-2 mt-2 right-0 top-10 bg-gray-100 rounded-md shadow-xl" name = "listDocente" style="display: none";>
+            <a href="/disciplinas/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-400 hover:text-white">
+                Disciplinas
             </a>
+            <a href="/aulas/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-400 hover:text-white">
+                Apoio às Aulas
+            </a>
+            <a href="/DPUC/secure/UCList.aspx" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-400 hover:text-white">
+                Dossiê Pedagógico
+            </a>
+            <a href="/creditacoes/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-400 hover:text-white">
+                Creditações Online
+            </a>
+        </div>
           </li>
 
-          <li class="font-medium hover:font-bold">
-            <a>
+          <li class="relative font-medium hover:font-bold dropdown flex items-center p-4" name="secretaria">
+            <a class="mr-4">
               Secretaria
+            </a> 
+            
+            <svg class="inline w-6 h-6 text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+            </svg>
+
+            <div x-show="open" x-transition:enter.duration.500ms="" x-transition:leave.duration.800ms="" class="absolute w-48 py-2 mt-2 right-0 top-10 bg-gray-100 rounded-md shadow-xl" name = "listSecretaria" style="display: none";>
+            <a href="/dsd/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-400 hover:text-white">
+                Distribuição de Serviço Docente
             </a>
+            <a href="/secretariaDEP/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-400 hover:text-white">
+                Apoio a Secretarias Departamentos
+            </a>
+            <a href="/horarios/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-400 hover:text-white">
+                Horários
+            </a>
+        </div>
           </li>
       </ul>
       
-</div>`;
+</div>
+`;
+header.appendChild(nav);
+body.appendChild(header);
 
-header.appendChild(nav)
-body.appendChild(header)
+//SECTION > ARTICLE
+section.className = `block mx-auto h-fit w-4/6 mt-10 mb-10`;
+section.appendChild(heading);
+section.appendChild(article);
+body.appendChild(section);
+
+//FAZER ISTO AQUI COM TYPES KEY OF!!!! PARA JÁ SÓ PARA ESTAR A FUNCIONAR! VAI PRECISAR DE REFACTORING! CASO ADICIONEM MAIS AVISOS FODEU!
+const Avisos = [
+{
+  Title1: arrInfo[0].querySelector('div[class="title"]')?.innerHTML,
+  Text1: arrInfo[0].querySelector('div[class="text"]')?.innerHTML
+},
+
+{
+  Title2: arrInfo[1].querySelector('div[class="title"]')?.innerHTML,
+  Text2: arrInfo[1].querySelector('div[class="text"]')?.innerHTML
+},
+
+{
+  Title3: arrInfo[2].querySelector('div[class="title"]')?.innerHTML,
+  Text3: arrInfo[2].querySelector('div[class="text"]')?.innerHTML
+},
+
+{
+  Title4: arrInfo[3].querySelector('div[class="title"]')?.innerHTML,
+  Text4: arrInfo[3].querySelector('div[class="text"]')?.innerHTML
+}
+];
+
+article.innerHTML = `
+<style>
+p a {font-weight: bold;} 
+li a {font-weight: bold;}
+</style>
+  <h3>${Avisos[0].Title1}</h3>
+  <p>${Avisos[0].Text1}</p>
+
+  <h3 class="mt-5">${Avisos[1].Title2}</h3>
+  <p>${Avisos[1].Text2}</p>
+
+  <h3 class="mt-5">${Avisos[2].Title3}</h3>
+  <p>${Avisos[2].Text3}</p>
+
+  <h3 class="mt-5">${Avisos[3].Title4}</h3>
+  <p class="mb-5">${Avisos[3].Text4}</p>
+`;
+
+footer.innerHTML = `
+<img class="py-5" src="/common/images/posi/rgbpos_peq.gif" alt="Programa Operacional Sociedade da Informação" border="0">
+<img class="py-5" src="/common/images/prodepCee/paco_prodep_cee.gif" alt="União Europeia - FEDER" width="105" height="75" border="0">
+<img class="py-5" src="/common/images/campusvirtuais/logo_e-U_105_75.gif" alt="e-U - Campus Virtuais" width="105" height="75" border="0">
+<img class="py-5" src="/common/images/prodepCee/paco_prodep_logo.gif" alt="PRODEP" width="105" height="75" border="0">
+`
+section.after(footer);
+
+//Event Listeners
+const buttonEstudante = nav.querySelector('li[name="estudante"]') as HTMLElement;
+const buttonDocente = nav.querySelector('li[name="docente"]') as HTMLElement;
+const buttonSecretaria = nav.querySelector('li[name="secretaria"]') as HTMLElement;
+
+const menuEstudante = nav.querySelector('div[name="listEstudante"]') as HTMLElement;
+const menuDocente = nav.querySelector('div[name="listDocente"]') as HTMLElement;
+const menuSecretaria = nav.querySelector('div[name="listSecretaria"]') as HTMLElement;
+
+buttonEstudante.onmouseover = () => menuEstudante.style.display = "block";
+buttonEstudante.onmouseleave = () => menuEstudante.style.display = "none";
+
+buttonDocente.onmouseover = () => menuDocente.style.display = "block";
+buttonDocente.onmouseleave = () => menuDocente.style.display = "none";
+
+buttonSecretaria.onmouseover = () => menuSecretaria.style.display = "block";
+buttonSecretaria.onmouseleave = () => menuSecretaria.style.display = "none";
+
