@@ -1,53 +1,74 @@
-declare const body: HTMLBodyElement;
-declare const info: HTMLElement;
-declare const arrInfo: NodeListOf<HTMLElement>;
-declare const childLink: HTMLLinkElement;
-declare const header: HTMLElement;
-declare const footer: HTMLElement;
-declare const nav: HTMLElement;
-declare const section: HTMLElement;
-declare const article: HTMLElement;
-declare const heading: HTMLHeadingElement;
-declare const Avisos: ({
-    Title1: string | undefined;
-    Text1: string | undefined;
-    Title2?: undefined;
-    Text2?: undefined;
-    Title3?: undefined;
-    Text3?: undefined;
-    Title4?: undefined;
-    Text4?: undefined;
-} | {
-    Title2: string | undefined;
-    Text2: string | undefined;
-    Title1?: undefined;
-    Text1?: undefined;
-    Title3?: undefined;
-    Text3?: undefined;
-    Title4?: undefined;
-    Text4?: undefined;
-} | {
-    Title3: string | undefined;
-    Text3: string | undefined;
-    Title1?: undefined;
-    Text1?: undefined;
-    Title2?: undefined;
-    Text2?: undefined;
-    Title4?: undefined;
-    Text4?: undefined;
-} | {
-    Title4: string | undefined;
-    Text4: string | undefined;
-    Title1?: undefined;
-    Text1?: undefined;
-    Title2?: undefined;
-    Text2?: undefined;
-    Title3?: undefined;
-    Text3?: undefined;
-})[];
-declare const buttonEstudante: HTMLElement;
-declare const buttonDocente: HTMLElement;
-declare const buttonSecretaria: HTMLElement;
-declare const menuEstudante: HTMLElement;
-declare const menuDocente: HTMLElement;
-declare const menuSecretaria: HTMLElement;
+interface DOMchanger {
+    deleteBody: () => void;
+    setClasses: () => void;
+    setInnerHTML: () => void;
+    setListeners: () => void;
+    appendElements: () => void;
+}
+type EVT = {
+    buttonEstudante: HTMLElement;
+    buttonDocente: HTMLElement;
+    buttonSecretaria: HTMLElement;
+};
+type Menu = {
+    menuEstudante: HTMLElement;
+    menuDocente: HTMLElement;
+    menuSecretaria: HTMLElement;
+};
+declare class RenderIndex implements DOMchanger {
+    body: HTMLBodyElement;
+    info: HTMLElement;
+    arrInfo: NodeListOf<HTMLElement>;
+    childLink: HTMLLinkElement;
+    header: HTMLElement;
+    footer: HTMLElement;
+    nav: HTMLElement;
+    section: HTMLElement;
+    article: HTMLElement;
+    heading: HTMLElement;
+    readonly avisos: ({
+        Title1: string;
+        Text1: string;
+        Title2?: undefined;
+        Text2?: undefined;
+        Title3?: undefined;
+        Text3?: undefined;
+        Title4?: undefined;
+        Text4?: undefined;
+    } | {
+        Title2: string;
+        Text2: string;
+        Title1?: undefined;
+        Text1?: undefined;
+        Title3?: undefined;
+        Text3?: undefined;
+        Title4?: undefined;
+        Text4?: undefined;
+    } | {
+        Title3: string;
+        Text3: string;
+        Title1?: undefined;
+        Text1?: undefined;
+        Title2?: undefined;
+        Text2?: undefined;
+        Title4?: undefined;
+        Text4?: undefined;
+    } | {
+        Title4: string;
+        Text4: string;
+        Title1?: undefined;
+        Text1?: undefined;
+        Title2?: undefined;
+        Text2?: undefined;
+        Title3?: undefined;
+        Text3?: undefined;
+    })[];
+    readonly buttons: EVT;
+    readonly menu: Menu;
+    constructor();
+    deleteBody: () => void;
+    setClasses: () => void;
+    setInnerHTML: () => void;
+    appendElements: () => void;
+    setListeners: () => void;
+}
