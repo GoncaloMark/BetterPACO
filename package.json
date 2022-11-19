@@ -2,7 +2,6 @@
   "name": "betterpaco",
   "version": "1.0.0",
   "description": "PACO-UA extensão que deixa essa coisa minimamente agradável",
-  "main": "src/main.ts",
   "scripts": {
     "build:tailwind": "npx postcss src/main.css -o dist/main.css",
     "build:dist": "npx tsc",
