@@ -16,16 +16,16 @@ type Menu = {
     menuSecretaria: HTMLElement;
 };
 declare class RenderIndex implements DOMchanger {
-    body: HTMLBodyElement;
-    info: HTMLElement;
-    arrInfo: NodeListOf<HTMLElement>;
-    childLink: HTMLLinkElement;
-    header: HTMLElement;
-    footer: HTMLElement;
-    nav: HTMLElement;
-    section: HTMLElement;
-    article: HTMLElement;
-    heading: HTMLElement;
+    private body;
+    private info;
+    private arrInfo;
+    private childLink;
+    private header;
+    private footer;
+    private nav;
+    private section;
+    private article;
+    private heading;
     readonly avisos: ({
         Title1: string;
         Text1: string;

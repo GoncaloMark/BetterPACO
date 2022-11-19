@@ -23,16 +23,16 @@ type Menu = {
 //Fazer um type Avisos!!
 
 class RenderIndex implements DOMchanger {
-  body;
-  info;
-  arrInfo: NodeListOf<HTMLElement> ;
-  childLink;
-  header;
-  footer;
-  nav;
-  section;
-  article;
-  heading;
+  private body;
+  private info;
+  private arrInfo: NodeListOf<HTMLElement> ;
+  private childLink;
+  private header;
+  private footer;
+  private nav;
+  private section;
+  private article;
+  private heading;
   readonly avisos;
   readonly buttons:EVT;
   readonly menu:Menu;
@@ -167,13 +167,13 @@ class RenderIndex implements DOMchanger {
           </div>
     
           <ul class="flex items-center space-x-8 text-white">
-              <li class="font-medium hover:font-bold p-4">
-                <a href="/secvirtual" class"mr-4">
+              <li class="font-medium p-4 cursor-pointer hover:border-b-2 hover:border-cyan-50">
+                <a href="/secvirtual" class"mr-4 ">
                   Secretaria Virtual
                 </a>
               </li>
     
-              <li class="relative font-medium hover:font-bold dropdown flex items-center p-4" name = "estudante">
+              <li class="relative font-medium dropdown flex items-center p-4 cursor-pointer" name = "estudante">
                 <a class="mr-4">
                   Estudante
                 </a> 
@@ -201,7 +201,7 @@ class RenderIndex implements DOMchanger {
                     </div>
               </li>
     
-              <li class="relative font-medium hover:font-bold dropdown flex items-center p-4" name="docente">
+              <li class="relative font-medium dropdown flex items-center p-4 cursor-pointer" name="docente">
                 <a class="mr-4">
                   Docente
                 </a> 
@@ -226,7 +226,7 @@ class RenderIndex implements DOMchanger {
             </div>
               </li>
     
-              <li class="relative font-medium hover:font-bold dropdown flex items-center p-4" name="secretaria">
+              <li class="relative font-medium dropdown flex items-center p-4 cursor-pointer" name="secretaria">
                 <a class="mr-4">
                   Secretaria
                 </a> 
