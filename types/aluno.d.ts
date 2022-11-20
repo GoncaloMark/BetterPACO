@@ -16,9 +16,11 @@ declare class RenderSecVirtual implements DOMchanger {
     appendElements: () => void;
     setListeners: () => void;
 }
-declare class TableParser {
+declare class TableDadosParser {
     divs: NodeListOf<Element>;
-    constructor();
+    table1: NodeListOf<Element>;
+    table2: NodeListOf<Element>;
+    table3: NodeListOf<Element>;
+    constructor(doc: any);
 }
-declare function func(): Promise<void>;
-declare let a: any;
+declare var documents: any;

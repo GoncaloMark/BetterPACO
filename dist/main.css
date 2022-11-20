@@ -511,6 +511,9 @@ video {
 .flex {
   display: flex;
 }
+.table {
+  display: table;
+}
 .h-fit {
   height: -moz-fit-content;
   height: fit-content;

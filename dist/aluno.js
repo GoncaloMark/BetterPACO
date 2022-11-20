@@ -37,6 +37,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+//TALVEZ APAGAR O BODY FORA DA CLASSE! E POR JÁ A NAVBAR EM ACTION TB!
 var RenderSecVirtual = /** @class */ (function () {
     function RenderSecVirtual() {
         this.deleteBody = function () {
@@ -55,35 +56,73 @@ var RenderSecVirtual = /** @class */ (function () {
     }
     return RenderSecVirtual;
 }());
-var TableParser = /** @class */ (function () {
-    function TableParser() {
-        this.divs = document.body.querySelectorAll('#template_main > div');
+var TableDadosParser = /** @class */ (function () {
+    function TableDadosParser(doc) {
+        this.divs = doc.body.querySelectorAll('#template_main > div');
+        this.table1 = this.divs[0].querySelectorAll('center > table > tbody > tr[class="table_line"]');
+        this.table2 = this.divs[1].querySelectorAll('center > table > tbody > tr[class="table_line"]');
+        this.table3 = this.divs[2].querySelectorAll('center > table > tbody > tr[class="table_line"]');
+        console.log(this.table1, this.table2, this.table3);
     }
-    return TableParser;
+    return TableDadosParser;
 }());
-//USE THIS TO MANIPULATE OTHER PAGES DOM!
-function func() {
-    return __awaiter(this, void 0, void 0, function () {
-        var doc;
-        return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0: return [4 /*yield*/, fetch("https://paco.ua.pt/").then(function (response) { return response.text(); }).then(function (html) {
-                        // Convert the HTML string into a document object
-                        var parser = new DOMParser();
-                        doc = parser.parseFromString(html, 'text/html');
-                        return doc;
-                    }).catch(function (err) {
-                        // There was an error
-                        console.warn('Something went wrong.', err);
-                    })];
-                case 1:
-                    _a.sent();
-                    return [2 /*return*/];
-            }
+var documents = [];
+window.onload = function () {
+    var links = [
+        "https://paco.ua.pt/secvirtual/c_dadospess.asp",
+        "https://paco.ua.pt/secvirtual/c_situacaoprescricao.asp",
+        "https://paco.ua.pt/secvirtual/c_planocurr.asp",
+        "https://paco.ua.pt/secvirtual/horarios/c_horario_aluno.asp",
+        "https://paco.ua.pt/secvirtual/c_calendarioDeExames.asp",
+        "https://paco.ua.pt/secvirtual/c_estadoDasProprinas.asp",
+        "https://paco.ua.pt/tcalunos/ConsultaInscricaoEfectuada.asp",
+    ];
+    //USE THIS TO MANIPULATE OTHER PAGES DOM!
+    function fetchOtherPages(links) {
+        return __awaiter(this, void 0, void 0, function () {
+            var doc, _loop_1, i;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _loop_1 = function (i) {
+                            return __generator(this, function (_b) {
+                                switch (_b.label) {
+                                    case 0: return [4 /*yield*/, fetch(links[i]).then(function (response) { return response.text(); }).then(function (html) {
+                                            // Convert the HTML string into a document object
+                                            var parser = new DOMParser();
+                                            doc = parser.parseFromString(html, 'text/html');
+                                            documents[i] = doc;
+                                        })
+                                            .catch(function (err) {
+                                            // There was an error
+                                            console.warn('Something went wrong.', err);
+                                        })];
+                                    case 1:
+                                        _b.sent();
+                                        return [2 /*return*/];
+                                }
+                            });
+                        };
+                        i = 0;
+                        _a.label = 1;
+                    case 1:
+                        if (!(i < links.length)) return [3 /*break*/, 4];
+                        return [5 /*yield**/, _loop_1(i)];
+                    case 2:
+                        _a.sent();
+                        _a.label = 3;
+                    case 3:
+                        i++;
+                        return [3 /*break*/, 1];
+                    case 4:
+                        ;
+                        return [2 /*return*/];
+                }
+            });
         });
+    }
+    ;
+    fetchOtherPages(links).then(function () {
+        new TableDadosParser(documents[0]);
     });
-}
-;
-var a;
-func().then(function (res) { return a = res; });
-console.log(a);
+};

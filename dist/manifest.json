@@ -15,7 +15,7 @@
       {
         "css": ["main.css"],
         "js": ["aluno.js"],
-        "matches": ["https://paco.ua.pt/secvirtual/c_dadospess.asp"]
+        "matches": ["https://paco.ua.pt/secvirtual/"]
       }
   
     ]
