@@ -37,9 +37,9 @@ var RenderIndex = /** @class */ (function () {
             _this.buttons.buttonSecretaria.onmouseleave = function () { return _this.menu.menuSecretaria.style.display = "none"; };
         };
         this.body = document.body;
+        this.childLink = document.getElementsByName("topo")[0];
         this.info = this.body.querySelectorAll('div[class="info"]')[1];
         this.arrInfo = this.info.querySelectorAll('div[class="alert"]');
-        this.childLink = document.getElementsByName("topo")[0];
         this.header = document.createElement("header");
         this.footer = document.createElement("footer");
         this.nav = document.createElement("nav");

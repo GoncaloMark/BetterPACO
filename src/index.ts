@@ -40,9 +40,10 @@ class RenderIndex implements DOMchanger {
   constructor(){
 
     this.body = document.body as HTMLBodyElement;
+    this.childLink = document.getElementsByName("topo")[0] as HTMLLinkElement;
     this.info = this.body.querySelectorAll('div[class="info"]')[1] as HTMLElement;
     this.arrInfo = this.info.querySelectorAll('div[class="alert"]');
-    this.childLink = document.getElementsByName("topo")[0] as HTMLLinkElement;
+
     this.header = document.createElement("header") as HTMLElement;
     this.footer = document.createElement("footer") as HTMLElement;
     this.nav = document.createElement("nav") as HTMLElement;
@@ -75,16 +76,19 @@ class RenderIndex implements DOMchanger {
       this.setClasses();
       this.setInnerHTML();
       this.appendElements();
+
       this.buttons = {
         buttonEstudante: this.nav.querySelector('li[name="estudante"]') as HTMLElement,
         buttonDocente: this.nav.querySelector('li[name="docente"]') as HTMLElement,
         buttonSecretaria: this.nav.querySelector('li[name="secretaria"]') as HTMLElement
       };
+
       this.menu = {
         menuEstudante: this.nav.querySelector('div[name="listEstudante"]') as HTMLElement,
         menuDocente: this.nav.querySelector('div[name="listDocente"]') as HTMLElement,
         menuSecretaria: this.nav.querySelector('div[name="listSecretaria"]') as HTMLElement,
       };
+
       this.setListeners();
   }
 
