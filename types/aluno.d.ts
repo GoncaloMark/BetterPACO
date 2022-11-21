@@ -19,9 +19,13 @@ declare class RenderSecVirtual implements DOMchanger {
 interface Dados {
     [key: string]: NodeListOf<Element>;
 }
+interface ConteudoLinha {
+    [key: string]: string[];
+}
 declare class TableDadosParser {
     divs: NodeListOf<Element>;
     tables: NodeListOf<Element>[];
+    content: ConteudoLinha;
     dados: Dados;
     constructor(doc: Document);
     getDados(): void;

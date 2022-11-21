@@ -47,11 +47,15 @@ interface Dados{
     [key:string] : NodeListOf<Element>
 }
 
+interface ConteudoLinha{
+    [key:string] : string[]
+}
+
 //TALVEZ FAZER UM TYPE QUE LIMPA OS TITULOS E OS VALORES?
 class TableDadosParser {
     divs;
     tables;
-
+    content:ConteudoLinha
     dados:Dados;
     constructor(doc:Document){
         this.dados = {}
@@ -65,21 +69,24 @@ class TableDadosParser {
                 this.divs[2].querySelectorAll('center > table > tbody > tr[class="table_line"]') as NodeListOf<Element>
             ]
         ;
+
+        this.content = {}
     }
 
     getDados(){
-        
         this.tables.forEach((element:NodeListOf<Element>, curIndex) => {
             element.forEach((element:Element, index) => {
                 this.dados["T"+(curIndex+1)+"Linha"+(index+1)] = element.querySelectorAll("td") as NodeListOf<Element>;
             })
-    
         })
-        
-        console.log(this.dados)
-        
 
-
+        Object.values(this.dados).forEach((element, curIndex) => {
+            const buffer:string[] = []
+            element.forEach((element) => {
+                buffer.push(element.innerHTML as string)
+                this.content["ContentLinha"+(curIndex+1)] = buffer;
+            })
+        })
     }
 
 }

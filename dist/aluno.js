@@ -67,6 +67,7 @@ var TableDadosParser = /** @class */ (function () {
                 this.divs[1].querySelectorAll('center > table > tbody > tr[class="table_line"]'),
                 this.divs[2].querySelectorAll('center > table > tbody > tr[class="table_line"]')
             ];
+        this.content = {};
     }
     TableDadosParser.prototype.getDados = function () {
         var _this = this;
@@ -75,7 +76,14 @@ var TableDadosParser = /** @class */ (function () {
                 _this.dados["T" + (curIndex + 1) + "Linha" + (index + 1)] = element.querySelectorAll("td");
             });
         });
-        console.log(this.dados);
+        Object.values(this.dados).forEach(function (element, curIndex) {
+            var buffer = [];
+            element.forEach(function (element) {
+                buffer.push(element.innerHTML);
+                _this.content["ContentLinha" + (curIndex + 1)] = buffer;
+            });
+        });
+        console.log(this.content);
     };
     return TableDadosParser;
 }());
