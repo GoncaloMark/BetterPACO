@@ -56,14 +56,27 @@ var RenderSecVirtual = /** @class */ (function () {
     }
     return RenderSecVirtual;
 }());
+//TALVEZ FAZER UM TYPE QUE LIMPA OS TITULOS E OS VALORES?
 var TableDadosParser = /** @class */ (function () {
     function TableDadosParser(doc) {
+        this.dados = {};
         this.divs = doc.body.querySelectorAll('#template_main > div');
-        this.table1 = this.divs[0].querySelectorAll('center > table > tbody > tr[class="table_line"]');
-        this.table2 = this.divs[1].querySelectorAll('center > table > tbody > tr[class="table_line"]');
-        this.table3 = this.divs[2].querySelectorAll('center > table > tbody > tr[class="table_line"]');
-        console.log(this.table1, this.table2, this.table3);
+        this.tables =
+            [
+                this.divs[0].querySelectorAll('center > table > tbody > tr[class="table_line"]'),
+                this.divs[1].querySelectorAll('center > table > tbody > tr[class="table_line"]'),
+                this.divs[2].querySelectorAll('center > table > tbody > tr[class="table_line"]')
+            ];
     }
+    TableDadosParser.prototype.getDados = function () {
+        var _this = this;
+        this.tables.forEach(function (element, curIndex) {
+            element.forEach(function (element, index) {
+                _this.dados["T" + (curIndex + 1) + "Linha" + (index + 1)] = element.querySelectorAll("td");
+            });
+        });
+        console.log(this.dados);
+    };
     return TableDadosParser;
 }());
 var documents = [];
@@ -123,6 +136,7 @@ window.onload = function () {
     }
     ;
     fetchOtherPages(links).then(function () {
-        new TableDadosParser(documents[0]);
+        var tables = new TableDadosParser(documents[0]);
+        tables.getDados();
     });
 };

@@ -20,8 +20,6 @@ class RenderSecVirtual implements DOMchanger {
         this.body = document.body as HTMLBodyElement;
         this.childLink = document.getElementsByName("topo")[0] as HTMLLinkElement;
         this.dadosContent = {}
-
-
     }
 
     deleteBody: () => void = () => {
@@ -45,17 +43,43 @@ class RenderSecVirtual implements DOMchanger {
     }
 }
 
+interface Dados{
+    [key:string] : NodeListOf<Element>
+}
+
 //TALVEZ FAZER UM TYPE QUE LIMPA OS TITULOS E OS VALORES?
 class TableDadosParser {
     divs;
-    table1;
-    table2;
-    table3;
-    constructor(doc:any){
+    tables;
+
+    dados:Dados;
+    constructor(doc:Document){
+        this.dados = {}
         this.divs = doc.body.querySelectorAll('#template_main > div') as NodeListOf<Element>;
-        this.table1 = this.divs[0].querySelectorAll('center > table > tbody > tr[class="table_line"]') as NodeListOf<Element>;
-        this.table2 = this.divs[1].querySelectorAll('center > table > tbody > tr[class="table_line"]') as NodeListOf<Element>;
-        this.table3 = this.divs[2].querySelectorAll('center > table > tbody > tr[class="table_line"]') as NodeListOf<Element>;
+        this.tables = 
+            [
+                this.divs[0].querySelectorAll('center > table > tbody > tr[class="table_line"]') as NodeListOf<Element>,
+
+                this.divs[1].querySelectorAll('center > table > tbody > tr[class="table_line"]') as NodeListOf<Element>,
+
+                this.divs[2].querySelectorAll('center > table > tbody > tr[class="table_line"]') as NodeListOf<Element>
+            ]
+        ;
+    }
+
+    getDados(){
+        
+        this.tables.forEach((element:NodeListOf<Element>, curIndex) => {
+            element.forEach((element:Element, index) => {
+                this.dados["T"+(curIndex+1)+"Linha"+(index+1)] = element.querySelectorAll("td") as NodeListOf<Element>;
+            })
+    
+        })
+        
+        console.log(this.dados)
+        
+
+
     }
 
 }
@@ -96,7 +120,8 @@ async function fetchOtherPages(links:string[]){
 };
 
 fetchOtherPages(links).then(() => {
-    new TableDadosParser(documents[0])
+    const tables = new TableDadosParser(documents[0])
+    tables.getDados()
 });
 }
 
