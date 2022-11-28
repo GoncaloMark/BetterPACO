@@ -16,6 +16,12 @@
         "css": ["main.css"],
         "js": ["aluno.js"],
         "matches": ["https://paco.ua.pt/secvirtual/"]
+      },
+
+      {
+        "css": ["main.css"],
+        "js": ["aluno.js"],
+        "matches": ["https://paco.ua.pt/secvirtual/avisodisponivel"]
       }
   
     ]
