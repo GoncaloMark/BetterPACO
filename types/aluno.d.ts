@@ -11,8 +11,12 @@ declare class RenderSecVirtual implements DOMchanger {
     dadosContent: {};
     footer: HTMLElement;
     nav: HTMLElement;
+    LeftDiv: HTMLElement;
+    RightDiv: HTMLElement;
     header: HTMLElement;
-    constructor();
+    section: HTMLElement;
+    content: Dados;
+    constructor(content: Dados);
     deleteBody: () => void;
     setClasses: () => void;
     setInnerHTML: () => void;
@@ -22,15 +26,11 @@ declare class RenderSecVirtual implements DOMchanger {
 interface Dados {
     [key: string]: NodeListOf<Element>;
 }
-interface ConteudoLinha {
-    [key: string]: Element[];
-}
 declare class TableDadosParser {
     divs: NodeListOf<Element>;
     tables: NodeListOf<Element>[];
-    content: ConteudoLinha;
     dados: Dados;
     constructor(doc: Document);
     getDados(): void;
 }
-declare var documents: any;
+declare var documents: Document[];

@@ -10,6 +10,7 @@ interface DOMchanger {
 }
 
 //TALVEZ APAGAR O BODY FORA DA CLASSE! E POR JÁ A NAVBAR EM ACTION TB!
+//TRANSFORMAR NAVBAR EM CLASS E FAZER UM COMPONENTE MSM!
 
 class RenderSecVirtual implements DOMchanger {
     body;
@@ -17,15 +18,24 @@ class RenderSecVirtual implements DOMchanger {
     dadosContent;
     footer;
     nav;
+    LeftDiv;
+    RightDiv;
     header;
+    section;
+    content;
 
-    constructor(){
+    constructor(content: Dados){
         this.body = document.body as HTMLBodyElement;
         this.childLink = document.getElementsByName("topo")[0] as HTMLLinkElement;
         this.footer = document.createElement("footer") as HTMLElement;
         this.nav = document.createElement("nav") as HTMLElement;
         this.header = document.createElement("header") as HTMLElement;
+        this.section = document.createElement("section") as HTMLElement;
+        this.LeftDiv = document.createElement("div") as HTMLElement;
+        this.RightDiv = document.createElement("div") as HTMLElement;
         this.dadosContent = {}
+        console.log(content)
+        this.content = content
 
         this.deleteBody();
         this.setClasses();
@@ -42,8 +52,11 @@ class RenderSecVirtual implements DOMchanger {
 
     setClasses: () => void = () => {
         this.body.className = `bg-sky-100`;
-        this.nav.className = `relativew-fullflex flex-wrap items-center justify-between bg-blue-600 py-4 text-yellow-50 hover:text-gray-700 focus:text-gray-700 shadow-lg navbar navbar-expand-lg navbar-light`;
+        this.nav.className = `relative w-full flex flex-wrap items-center justify-between bg-blue-600 py-4 text-yellow-50 hover:text-gray-700 focus:text-gray-700 shadow-lg navbar navbar-expand-lg navbar-light`;
         this.footer.className = `container-fluid w-full flex flex-wrap items-center px-6 h-fit bg-blue-600 justify-left`;
+        this.section.className = `block h-fit w-4/6 mt-10 mb-10 flow-root`;
+        this.LeftDiv.className = `float-left`;
+        this.RightDiv.className = `float-right`;
     }
 
     setInnerHTML: () => void = () => {
@@ -128,7 +141,7 @@ class RenderSecVirtual implements DOMchanger {
     
                 <div x-show="open" x-transition:enter.duration.500ms="" x-transition:leave.duration.800ms="" class="absolute w-48 py-2 mt-2 right-0 top-10 bg-gray-100 rounded-md shadow-xl" name = "listEstudante" style="display: none";>
                         <a href="/matriculas/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-400 hover:text-white">
-                            Matrículas Online
+                            Matr�culas Online
                         </a>
                         <a href="https://paco.ua.pt/Candidaturas" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-400 hover:text-white">
                             Candidaturas
@@ -160,13 +173,13 @@ class RenderSecVirtual implements DOMchanger {
                     Disciplinas
                 </a>
                 <a href="/aulas/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-400 hover:text-white">
-                    Apoio às Aulas
+                    Apoio �s Aulas
                 </a>
                 <a href="/DPUC/secure/UCList.aspx" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-400 hover:text-white">
-                    Dossiê Pedagógico
+                    Dossi� Pedag�gico
                 </a>
                 <a href="/creditacoes/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-400 hover:text-white">
-                    Creditações Online
+                    Credita��es Online
                 </a>
             </div>
               </li>
@@ -182,13 +195,13 @@ class RenderSecVirtual implements DOMchanger {
     
                 <div x-show="open" x-transition:enter.duration.500ms="" x-transition:leave.duration.800ms="" class="absolute w-48 py-2 mt-2 right-0 top-10 bg-gray-100 rounded-md shadow-xl" name = "listSecretaria" style="display: none";>
                 <a href="/dsd/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-400 hover:text-white">
-                    Distribuição de Serviço Docente
+                    Distribui��o de Servi�o Docente
                 </a>
                 <a href="/secretariaDEP/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-400 hover:text-white">
                     Apoio a Secretarias Departamentos
                 </a>
                 <a href="/horarios/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-400 hover:text-white">
-                    Horários
+                    Hor�rios
                 </a>
             </div>
               </li>
@@ -196,11 +209,65 @@ class RenderSecVirtual implements DOMchanger {
           
     </div>
     `;
+
+    this.LeftDiv.innerHTML = `
+    <div class="flex flex-col items-center">
+                <img src=${this.content.T1Linha1[2].querySelector("img")?.src} class="w-40 h-40 border-4 border-white rounded-full">
+                <div class="flex items-center space-x-2 mt-2">
+                    <p class="text-2xl">${this.content.T1Linha1[1].textContent?.split('-')[1]}</p>
+                </div>
+                <span class="text-gray-700">${this.content.T1Linha1[1].textContent?.split('-')[0]} ${this.content.T1Linha5[2].querySelector("img")?.alt}</span>
+            </div>
+        </div>
+
+        <div class="my-4 flex flex-col 2xl:flex-row space-y-2 2xl:space-y-0 2xl:space-x-2">
+            <div class="flex flex-col w-4/5 mx-auto">
+                <div class="flex-1 bg-white rounded-lg shadow-xl p-8">
+                    <h4 class="text-xl text-gray-900 font-bold">Dados Pessoais</h4>
+                    <ul class="mt-2 text-gray-700">
+                        <li class="flex border-y py-2">
+                            <span class="font-bold w-24 mr-5">BI</span>
+                            <span class="text-gray-700">${this.content.T1Linha4[1].textContent}</span>
+                        </li>
+                        <li class="flex border-b py-2">
+                            <span class="font-bold w-24 mr-5">Nasceu a</span>
+                            <span class="text-gray-700">${this.content.T1Linha5[1].textContent}</span>
+                        </li>
+                        <li class="flex flex-wrap border-b py-2">
+                            <span class="font-bold w-24 mr-5">Pai/Mãe</span>
+                            <span class="flex flex-col">
+                                <p class="text-gray-700">${this.content.T1Linha2[1].textContent}</p> 
+                                <p class="text-gray-700">${this.content.T1Linha3[1].textContent}</p>
+                            </span>
+                            
+                        </li>
+                        <li class="flex border-b py-2">
+                            <span class="font-bold w-24 mr-5">Telemóvel</span>
+                            <span class="text-gray-700">${this.content.T2Linha2[1].textContent}</span>
+                        </li>
+                        <li class="flex border-b py-2">
+                            <span class="font-bold w-24 mr-5">Email</span>
+                            <span class="text-gray-700">${this.content.T2Linha3[1].textContent}</span>
+                        </li>
+                        <li class="flex border-b py-2">
+                            <span class="font-bold w-24 mr-5">Morada</span>
+                            <span class="text-gray-700">${this.content.T2Linha8[1].textContent} ${this.content.T2Linha9[1].textContent} ${this.content.T2Linha10[1].textContent}</span>
+                        </li>
+                        <li class="flex border-b py-2">
+                            <span class="font-bold w-24 mr-5">Contribuinte</span>
+                            <span class="text-gray-700">${this.content.T3Linha1[1].textContent}</span>
+                        </li>
+                    </ul>
+                </div>
+    `;
     }
 
     appendElements: () => void = () => {
         this.header.appendChild(this.nav);
         this.body.appendChild(this.header);
+        this.section.appendChild(this.LeftDiv);
+        this.section.appendChild(this.RightDiv);
+        this.nav.after(this.section);
     }
 
     setListeners: () => void = () => {
@@ -212,15 +279,11 @@ interface Dados{
     [key:string] : NodeListOf<Element>
 }
 
-interface ConteudoLinha{
-    [key:string] : Element[]
-}
 
 //TALVEZ FAZER UM TYPE QUE LIMPA OS TITULOS E OS VALORES?
 class TableDadosParser {
     divs;
     tables;
-    content:ConteudoLinha
     dados:Dados;
     constructor(doc:Document){
         this.dados = {}
@@ -235,7 +298,6 @@ class TableDadosParser {
             ]
         ;
 
-        this.content = {}
     }
 
     getDados(){
@@ -245,23 +307,11 @@ class TableDadosParser {
             })
         })
 
-        Object.values(this.dados).forEach((element, curIndex) => {
-            const buffer:Element[] = []
-            element.forEach((element) => {
-                    Array.from(element.children).forEach((element) => {
-                        buffer.push(element as Element)
-                this.content["ContentLinha"+(curIndex+1)] = buffer;
-                    })
-            })
-        })
-
-        console.log(this.content)
-
     }
 
 }
 
-var documents:any = []
+var documents:Document[] = []
 
 window.onload = () => {
     const links = 
@@ -275,31 +325,44 @@ window.onload = () => {
         "https://paco.ua.pt/tcalunos/ConsultaInscricaoEfectuada.asp",
     ]
 
-//USE THIS TO MANIPULATE OTHER PAGES DOM!
 async function fetchOtherPages(links:string[]){
-    let doc;
-    for(let i=0; i<links.length; i++){
+    let myHeaders = new Headers();
+    myHeaders.append('Content-Type','text/html; charset=windows-1252');
+    let doc:Document;
+    const text:any[] = []
+    await Promise.all(
+        links.map(
+            (el) => fetch(el, {headers: myHeaders})
+                    .then(res => res.arrayBuffer())
+                    .then(buffer => {
+                        const decoder = new TextDecoder('windows-1252');
+                        const text = decoder.decode(buffer);
+                        return text
+                    })
+                    )
+                    
+        )
+    .then((res) => {
+        res.map((el) => {
+            text.push(el)
+        })
+        return text
+    })
+    .then((html) => {
+        const parser = new DOMParser();
 
-        await fetch(links[i]).then((response) => {return response.text()}).then(function (html) {
-
-            // Convert the HTML string into a document object
-            const parser = new DOMParser();
-            doc = parser.parseFromString(html, 'text/html');
+        for(let i = 0; i < html.length; i++){
+            doc = parser.parseFromString(html[i], 'text/html');
             documents[i] = doc;
-        })
-        
-        .catch(function (err) {
-            // There was an error
-            console.warn('Something went wrong.', err);
-        })
-        
-    };
+        };
+        }) 
+    .catch(e => console.warn(e.message))
 };
 
 fetchOtherPages(links).then(() => {
     const tables = new TableDadosParser(documents[0])
     tables.getDados()
-    new RenderSecVirtual
+    new RenderSecVirtual(tables.dados)
 });
 }
 
