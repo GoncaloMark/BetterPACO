@@ -7,7 +7,7 @@ interface DOMchanger {
     setInnerHTML: () => void;
     setListeners: () => void;
     appendElements: () => void;
-}
+};
 
 //TALVEZ APAGAR O BODY FORA DA CLASSE! E POR JÁ A NAVBAR EM ACTION TB!
 //TRANSFORMAR NAVBAR EM CLASS E FAZER UM COMPONENTE MSM!
@@ -19,12 +19,13 @@ class RenderSecVirtual implements DOMchanger {
     footer;
     nav;
     LeftDiv;
-    RightDiv;
     header;
     section;
     content;
+    aulas;
+    ClassInfo;
 
-    constructor(content: Dados){
+    constructor(content: Dados, aulas:NodeListOf<Element>, dias:Classes){
         this.body = document.body as HTMLBodyElement;
         this.childLink = document.getElementsByName("topo")[0] as HTMLLinkElement;
         this.footer = document.createElement("footer") as HTMLElement;
@@ -32,10 +33,10 @@ class RenderSecVirtual implements DOMchanger {
         this.header = document.createElement("header") as HTMLElement;
         this.section = document.createElement("section") as HTMLElement;
         this.LeftDiv = document.createElement("div") as HTMLElement;
-        this.RightDiv = document.createElement("div") as HTMLElement;
-        this.dadosContent = {}
-        console.log(content)
-        this.content = content
+        this.dadosContent = {};
+        this.content = content;
+        this.aulas = aulas;
+        this.ClassInfo = dias;
 
         this.deleteBody();
         this.setClasses();
@@ -44,20 +45,19 @@ class RenderSecVirtual implements DOMchanger {
 
 
         this.appendElements();
-    }
+    };
 
     deleteBody: () => void = () => {
-        this.body.removeChild(this.childLink)
-    }
+        this.body.removeChild(this.childLink);
+    };
 
     setClasses: () => void = () => {
         this.body.className = `bg-sky-100`;
         this.nav.className = `relative w-full flex flex-wrap items-center justify-between bg-blue-600 py-4 text-yellow-50 hover:text-gray-700 focus:text-gray-700 shadow-lg navbar navbar-expand-lg navbar-light`;
         this.footer.className = `container-fluid w-full flex flex-wrap items-center px-6 h-fit bg-blue-600 justify-left`;
-        this.section.className = `block h-fit w-4/6 mt-10 mb-10 flow-root`;
-        this.LeftDiv.className = `float-left`;
-        this.RightDiv.className = `float-right`;
-    }
+        this.section.className = `block h-fit mt-10 mb-10 flow-root w-full`;
+        this.LeftDiv.className = `flex flex-row w-full`;
+    };
 
     setInnerHTML: () => void = () => {
         this.nav.innerHTML = `
@@ -217,77 +217,227 @@ class RenderSecVirtual implements DOMchanger {
                     <p class="text-2xl">${this.content.T1Linha1[1].textContent?.split('-')[1]}</p>
                 </div>
                 <span class="text-gray-700">${this.content.T1Linha1[1].textContent?.split('-')[0]} ${this.content.T1Linha5[2].querySelector("img")?.alt}</span>
-            </div>
-        </div>
 
-        <div class="my-4 flex flex-col 2xl:flex-row space-y-2 2xl:space-y-0 2xl:space-x-2">
-            <div class="flex flex-col w-4/5 mx-auto">
-                <div class="flex-1 bg-white rounded-lg shadow-xl p-8">
-                    <h4 class="text-xl text-gray-900 font-bold">Dados Pessoais</h4>
-                    <ul class="mt-2 text-gray-700">
-                        <li class="flex border-y py-2">
-                            <span class="font-bold w-24 mr-5">BI</span>
-                            <span class="text-gray-700">${this.content.T1Linha4[1].textContent}</span>
-                        </li>
-                        <li class="flex border-b py-2">
-                            <span class="font-bold w-24 mr-5">Nasceu a</span>
-                            <span class="text-gray-700">${this.content.T1Linha5[1].textContent}</span>
-                        </li>
-                        <li class="flex flex-wrap border-b py-2">
-                            <span class="font-bold w-24 mr-5">Pai/Mãe</span>
-                            <span class="flex flex-col">
-                                <p class="text-gray-700">${this.content.T1Linha2[1].textContent}</p> 
-                                <p class="text-gray-700">${this.content.T1Linha3[1].textContent}</p>
-                            </span>
-                            
-                        </li>
-                        <li class="flex border-b py-2">
-                            <span class="font-bold w-24 mr-5">Telemóvel</span>
-                            <span class="text-gray-700">${this.content.T2Linha2[1].textContent}</span>
-                        </li>
-                        <li class="flex border-b py-2">
-                            <span class="font-bold w-24 mr-5">Email</span>
-                            <span class="text-gray-700">${this.content.T2Linha3[1].textContent}</span>
-                        </li>
-                        <li class="flex border-b py-2">
-                            <span class="font-bold w-24 mr-5">Morada</span>
-                            <span class="text-gray-700">${this.content.T2Linha8[1].textContent} ${this.content.T2Linha9[1].textContent} ${this.content.T2Linha10[1].textContent}</span>
-                        </li>
-                        <li class="flex border-b py-2">
-                            <span class="font-bold w-24 mr-5">Contribuinte</span>
-                            <span class="text-gray-700">${this.content.T3Linha1[1].textContent}</span>
-                        </li>
-                    </ul>
+        <div class = "flex flex-row">
+                <div class="my-4 flex flex-col 2xl:flex-row space-y-2 2xl:space-y-0 2xl:space-x-2 w-2/5 mx-auto">
+                    <div class="flex flex-col">
+                        <div class="flex-1 bg-white rounded-lg shadow-xl p-8">
+                            <h4 class="text-xl text-gray-900 font-bold">Dados Pessoais</h4>
+                            <ul class="mt-2 text-gray-700">
+                                <li class="flex border-y py-2">
+                                    <span class="font-bold w-24 mr-5">BI</span>
+                                    <span class="text-gray-700">${this.content.T1Linha4[1].textContent}</span>
+                                </li>
+                                <li class="flex border-b py-2">
+                                    <span class="font-bold w-24 mr-5">Nasceu a</span>
+                                    <span class="text-gray-700">${this.content.T1Linha5[1].textContent}</span>
+                                </li>
+                                <li class="flex border-b py-2 flex-wrap">
+                                    <span class="font-bold w-24 mr-5">Pai/Mãe</span>
+                                    <span class="flex flex-wrap flex-1">
+                                        <p class="text-gray-700">${this.content.T1Linha2[1].textContent}</p> 
+                                        <p class="text-gray-700">${this.content.T1Linha3[1].textContent}</p>
+                                    </span>
+                                    
+                                </li>
+                                <li class="flex border-b py-2">
+                                    <span class="font-bold w-24 mr-5">Telemóvel</span>
+                                    <span class="text-gray-700">${this.content.T2Linha2[1].textContent}</span>
+                                </li>
+                                <li class="flex border-b py-2">
+                                    <span class="font-bold w-24 mr-5">Email</span>
+                                    <span class="text-gray-700">${this.content.T2Linha3[1].textContent}</span>
+                                </li>
+                                <li class="flex border-b py-2">
+                                    <span class="font-bold w-24 mr-5">Morada</span>
+                                    <span class="flex flex-col">
+                                        <p class="text-gray-700">${this.content.T2Linha8[1].textContent}</p> 
+                                        <p class="text-gray-700">${this.content.T2Linha9[1].textContent}</p>
+                                        <p class="text-gray-700">${this.content.T2Linha10[1].textContent}</p>
+                                    </span>
+                                </li>
+                                <li class="flex border-b py-2">
+                                    <span class="font-bold w-24 mr-5">Contribuinte</span>
+                                    <span class="text-gray-700">${this.content.T3Linha1[1].textContent}</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+    </div>
+
+        
+                <div class="overflow-x-hidden relative my-4 mx-auto w-2/5 rounded-lg ">
+                    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400 shadow-md rounded-lg border-collapse border border-slate-400">
+                        <thead class="text-xs text-gray-700 uppercase dark:text-gray-400">
+                            <tr>
+                                <th scope="col" class="py-3 px-6 bg-gray-50 dark:bg-gray-800 border border-slate-300">
+                                    Segunda-Feira
+                                </th>
+                                <th scope="col" class="py-3 px-6 bg-gray-50 dark:bg-gray-800 border border-slate-300">
+                                    Terça-Feira
+                                </th>
+                                <th scope="col" class="py-3 px-6 bg-gray-50 dark:bg-gray-800 border border-slate-300">
+                                    Quarta-Feira
+                                </th>
+                                <th scope="col" class="py-3 px-6 bg-gray-50 dark:bg-gray-800 border border-slate-300">
+                                    Quinta-Feira
+                                </th>
+                                <th scope="col" class="py-3 px-6 bg-gray-50 dark:bg-gray-800 border border-slate-300">
+                                    Sexta-Feira
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="border-b border border-slate-300 dark:border-gray-700 ">
+                                <td scope="row" class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                                    
+                                </td>
+                                
+                                <td class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                                    
+                                </td>
+                                <td class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                                    
+                                </td>
+                                <td class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                                    
+                                </td>
+                                <td class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                                    
+                                </td>
+                                
+                            </tr>
+                            <tr class="border-b border border-slate-300 dark:border-gray-700">
+                                <td scope="row" class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                                    
+                                </td>
+                                <td class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                                    
+                                </td>
+                                <td class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                                    
+                                </td>
+                                <td class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                                    
+                                </td>
+                                <td class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                                    
+                                
+                            </tr>
+                            <tr class=" border border-slate-300 dark:border-gray-700">
+                                <td scope="row" class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                                    
+                                </td>
+                                <td class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                                    
+                                </td>
+                                <td class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                                    
+                                </td>
+                                <td class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                                    
+                                </td>
+                                <td class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                                    
+                                
+                            </tr>
+                            <tr class="border border-slate-300 dark:border-gray-700">
+                                <td scope="row" class="py-4 flex-col px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                                    
+                                </td>
+                                <td class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                                    
+                                </td>
+                                <td class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                                    
+                                </td>
+                                <td class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                                    
+                                </td>
+                                <td class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                                    
+                                </td>
+                                
+                            </tr>
+                            <tr>
+                                <td scope="row" class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                                    
+                                </td>
+                                <td class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                                    
+                                </td>
+                                <td class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                                    
+                                </td>
+                                <td class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                                    
+                                </td>
+                                <td class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                                    
+                                </td>
+                                
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
+</div>
     `;
-    }
+
+    const table = this.LeftDiv.querySelectorAll("table > tbody > tr")
+
+    Object.values(this.ClassInfo).map((el, index) => {
+        console.log(el[0])
+        if(el[0] === "Segunda-Feira"){
+            table[0].children[0].innerHTML = '<p class="text-center">' +  el[1] + '</p>' + '<p class="text-center"><b>' + this.aulas[index].attributes[5].value.split("INÍCIO:")[1].split("DURAÇÃO")[0] + '- ' + (parseInt(this.aulas[index].attributes[5].value.split("INÍCIO:")[1].split("DURAÇÃO")[0]) + parseInt(this.aulas[index].attributes[5].value.split("DURAÇÃO:")[1].split('LOTAÇÃO')[0])) + 'h</b></p>'
+        } else if(el[0] === "Terça-Feira"){
+            table[0].children[1].innerHTML = '<p class="text-center">' +  el[1] + '</p>' + '<p class="text-center"><b>' + this.aulas[index].attributes[5].value.split("INÍCIO:")[1].split("DURAÇÃO")[0] + '- ' + (parseInt(this.aulas[index].attributes[5].value.split("INÍCIO:")[1].split("DURAÇÃO")[0]) + parseInt(this.aulas[index].attributes[5].value.split("DURAÇÃO:")[1].split('LOTAÇÃO')[0])) + 'h</b></p>'
+        } else if(el[0] === "Quarta-Feira"){
+            table[0].children[2].innerHTML = '<p class="text-center">' +  el[1] + '</p>' + '<p class="text-center"><b>' + this.aulas[index].attributes[5].value.split("INÍCIO:")[1].split("DURAÇÃO")[0] + '- ' + (parseInt(this.aulas[index].attributes[5].value.split("INÍCIO:")[1].split("DURAÇÃO")[0]) + parseInt(this.aulas[index].attributes[5].value.split("DURAÇÃO:")[1].split('LOTAÇÃO')[0])) + 'h</b></p>'
+        } else if(el[0] === "Quinta-Feira"){
+            table[0].children[3].innerHTML = '<p class="text-center">' +  el[1] + '</p>' + '<p class="text-center"><b>' + this.aulas[index].attributes[5].value.split("INÍCIO:")[1].split("DURAÇÃO")[0] + '- ' + (parseInt(this.aulas[index].attributes[5].value.split("INÍCIO:")[1].split("DURAÇÃO")[0]) + parseInt(this.aulas[index].attributes[5].value.split("DURAÇÃO:")[1].split('LOTAÇÃO')[0])) + 'h</b></p>'
+        } else if(el[0] === "Sexta-Feira"){
+            table[0].children[4].innerHTML = '<p class="text-center">' +  el[1] + '</p>' + '<p><b>' + this.aulas[index].attributes[5].value.split("INÍCIO:")[1].split("DURAÇÃO")[0] + '- ' + (parseInt(this.aulas[index].attributes[5].value.split("INÍCIO:")[1].split("DURAÇÃO")[0]) + parseInt(this.aulas[index].attributes[5].value.split("DURAÇÃO:")[1].split('LOTAÇÃO')[0])) + 'h</b></p>'
+        }
+    })
+    };
 
     appendElements: () => void = () => {
         this.header.appendChild(this.nav);
         this.body.appendChild(this.header);
         this.section.appendChild(this.LeftDiv);
-        this.section.appendChild(this.RightDiv);
         this.nav.after(this.section);
-    }
+    };
 
     setListeners: () => void = () => {
         
-    }
-}
+    };
+};
 
 interface Dados{
     [key:string] : NodeListOf<Element>
+};
+
+interface Classes{
+    [key:string]: string[]
 }
 
-
-//TALVEZ FAZER UM TYPE QUE LIMPA OS TITULOS E OS VALORES?
 class TableDadosParser {
-    divs;
-    tables;
+    divs: NodeListOf<Element>;
+    tables!: NodeListOf<Element>[];
     dados:Dados;
+    doc:Document;
+    lines!: NodeListOf<Element>;
+    classInfo: Classes;
     constructor(doc:Document){
-        this.dados = {}
-        this.divs = doc.body.querySelectorAll('#template_main > div') as NodeListOf<Element>;
+        this.doc = doc;
+        this.dados = {};
+        this.divs = this.doc.body.querySelectorAll('#template_main > div') as NodeListOf<Element>;
+        this.classInfo = {}
+
+    };
+
+    getDados(){
         this.tables = 
             [
                 this.divs[0].querySelectorAll('center > table > tbody > tr[class="table_line"]') as NodeListOf<Element>,
@@ -298,20 +448,44 @@ class TableDadosParser {
             ]
         ;
 
-    }
-
-    getDados(){
         this.tables.forEach((element:NodeListOf<Element>, curIndex) => {
             element.forEach((element:Element, index) => {
                 this.dados["T"+(curIndex+1)+"Linha"+(index+1)] = element.querySelectorAll("td") as NodeListOf<Element>;
-            })
-        })
+            });
+        });
+    };
 
-    }
+    getSchedule(ScheD:Document){
+                const schedule = ScheD.body.querySelectorAll('#template_main > table')[0];
+                const lines = schedule.querySelectorAll('tbody > tr:nth-child(n+3):nth-child(-n+8) > td[class="horario_turma"]');
+                this.lines = lines;
+                enum dias{
+                    "Segunda",
+                    "Terça",
+                    "Quarta",
+                    "Quinta",
+                    "Sexta"
+                }
 
+                this.lines.forEach((el, index) => {
+                    const title = el.attributes[5];
+                    if(title.value.includes(dias[0])){
+                        this.classInfo["Aula"+index] = ["Segunda-Feira", el.textContent?.split("(")[0].split("\n")[1] as string];
+                    } else if(title.value.includes(dias[1])){
+                        this.classInfo["Aula"+index] = ["Terça-Feira", el.textContent?.split("(")[0].split("\n")[1] as string];
+                    } else if(title.value.includes(dias[2])){
+                        this.classInfo["Aula"+index] = ["quarta-Feira", el.textContent?.split("(")[0].split("\n")[1] as string];
+                    } else if(title.value.includes(dias[3])){
+                        this.classInfo["Aula"+index] = ["Quinta-Feira", el.textContent?.split("(")[0].split("\n")[1] as string];
+                    } else if(title.value.includes(dias[4])){
+                        this.classInfo["Aula"+index] = ["Sexta-Feira", el.textContent?.split("(")[0].split("\n")[1] as string];
+                    };
+
+                });
+    };
 }
 
-var documents:Document[] = []
+var documents:Document[] = [];
 
 window.onload = () => {
     const links = 
@@ -323,13 +497,13 @@ window.onload = () => {
         "https://paco.ua.pt/secvirtual/c_calendarioDeExames.asp",
         "https://paco.ua.pt/secvirtual/c_estadoDasProprinas.asp",
         "https://paco.ua.pt/tcalunos/ConsultaInscricaoEfectuada.asp",
-    ]
+    ];
 
 async function fetchOtherPages(links:string[]){
     let myHeaders = new Headers();
     myHeaders.append('Content-Type','text/html; charset=windows-1252');
     let doc:Document;
-    const text:any[] = []
+    const text:any[] = [];
     await Promise.all(
         links.map(
             (el) => fetch(el, {headers: myHeaders})
@@ -337,16 +511,16 @@ async function fetchOtherPages(links:string[]){
                     .then(buffer => {
                         const decoder = new TextDecoder('windows-1252');
                         const text = decoder.decode(buffer);
-                        return text
+                        return text;
                     })
                     )
                     
         )
     .then((res) => {
         res.map((el) => {
-            text.push(el)
+            text.push(el);
         })
-        return text
+        return text;
     })
     .then((html) => {
         const parser = new DOMParser();
@@ -360,11 +534,12 @@ async function fetchOtherPages(links:string[]){
 };
 
 fetchOtherPages(links).then(() => {
-    const tables = new TableDadosParser(documents[0])
-    tables.getDados()
-    new RenderSecVirtual(tables.dados)
+    const tables = new TableDadosParser(documents[0]);
+    tables.getDados();
+    tables.getSchedule(documents[3]);
+    new RenderSecVirtual(tables.dados, tables.lines, tables.classInfo);
 });
-}
+};
 
 
 
