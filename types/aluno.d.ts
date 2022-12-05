@@ -5,6 +5,11 @@ interface DOMchanger {
     setListeners: () => void;
     appendElements: () => void;
 }
+type TimeMap = {
+    "hours": string;
+    "minutes": string;
+};
+declare const addTimes: (timeMap: TimeMap[]) => string;
 declare class RenderSecVirtual implements DOMchanger {
     body: HTMLBodyElement;
     childLink: HTMLLinkElement;

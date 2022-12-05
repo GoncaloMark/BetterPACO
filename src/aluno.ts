@@ -9,8 +9,36 @@ interface DOMchanger {
     appendElements: () => void;
 };
 
+type TimeMap = {
+    "hours": string,
+    "minutes": string
+}
 //TALVEZ APAGAR O BODY FORA DA CLASSE! E POR JÁ A NAVBAR EM ACTION TB!
 //TRANSFORMAR NAVBAR EM CLASS E FAZER UM COMPONENTE MSM!
+
+const addTimes = function(timeMap: TimeMap[]) {
+    let totalH = 0
+    let totalM = 0
+    // First simply adding all of it together, total hours and total minutes
+    for (var x in timeMap) {
+        totalH += parseInt(timeMap[x].hours, 10);
+        totalM += parseInt(timeMap[x].minutes, 10);
+    }
+
+    // If the minutes exceed 60
+    if (totalM >= 60) {
+        // Divide minutes by 60 and add result to hours
+        totalH += Math.floor(totalM / 60);
+        // Add remainder of totalM / 60 to minutes
+        totalM = totalM % 60;
+    }
+
+    if(totalM === 0){
+        return totalH + "h"
+    }
+
+    return totalH + "h" + totalM;
+}
 
 class RenderSecVirtual implements DOMchanger {
     body;
@@ -378,26 +406,173 @@ class RenderSecVirtual implements DOMchanger {
                                 </td>
                                 
                             </tr>
+                            <tr class="border-b border border-slate-300 dark:border-gray-700 ">
+                                <td scope="row" class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                                    
+                                </td>
+                                
+                                <td class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                                    
+                                </td>
+                                <td class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                                    
+                                </td>
+                                <td class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                                    
+                                </td>
+                                <td class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                                    
+                                </td>
+                                
+                            </tr>
+                            <tr class="border-b border border-slate-300 dark:border-gray-700 ">
+                                <td scope="row" class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                                    
+                                </td>
+                                
+                                <td class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                                    
+                                </td>
+                                <td class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                                    
+                                </td>
+                                <td class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                                    
+                                </td>
+                                <td class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                                    
+                                </td>
+                                
+                            </tr>
+                            <tr class="border-b border border-slate-300 dark:border-gray-700 ">
+                                <td scope="row" class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                                    
+                                </td>
+                                
+                                <td class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                                    
+                                </td>
+                                <td class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                                    
+                                </td>
+                                <td class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                                    
+                                </td>
+                                <td class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                                    
+                                </td>
+                                
+                            </tr>
+                            <tr class="border-b border border-slate-300 dark:border-gray-700 ">
+                                <td scope="row" class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                                    
+                                </td>
+                                
+                                <td class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                                    
+                                </td>
+                                <td class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                                    
+                                </td>
+                                <td class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                                    
+                                </td>
+                                <td class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                                    
+                                </td>
+                                
+                            </tr>
+                            <tr class="border-b border border-slate-300 dark:border-gray-700 ">
+                                <td scope="row" class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                                    
+                                </td>
+                                
+                                <td class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                                    
+                                </td>
+                                <td class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                                    
+                                </td>
+                                <td class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                                    
+                                </td>
+                                <td class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                                    
+                                </td>
+                                
+                            </tr>
+                            <tr class="border-b border border-slate-300 dark:border-gray-700 ">
+                                <td scope="row" class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                                    
+                                </td>
+                                
+                                <td class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                                    
+                                </td>
+                                <td class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                                    
+                                </td>
+                                <td class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                                    
+                                </td>
+                                <td class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                                    
+                                </td>
+                                
+                            </tr>
+                            <tr class="border-b border border-slate-300 dark:border-gray-700 ">
+                                <td scope="row" class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                                    
+                                </td>
+                                
+                                <td class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                                    
+                                </td>
+                                <td class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                                    
+                                </td>
+                                <td class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                                    
+                                </td>
+                                <td class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                                    
+                                </td>
+                                
+                            </tr>
                         </tbody>
                     </table>
                 </div>
 </div>
     `;
 
+    //FAZER COM QUE ACRESCENTE TR E TD DINAMICAMENTE!!
     const table = this.LeftDiv.querySelectorAll("table > tbody > tr")
 
     Object.values(this.ClassInfo).map((el, index) => {
         console.log(el[0])
+        const inicio:TimeMap = {
+            hours: this.aulas[index].attributes[5].value.split("INÍCIO:")[1].split("DURAÇÃO")[0].split("h")[0],
+            minutes: this.aulas[index].attributes[5].value.split("INÍCIO:")[1].split("DURAÇÃO")[0].split("h")[1] === ' ' || '\n' ? "00" : this.aulas[index].attributes[5].value.split("INÍCIO:")[1].split("DURAÇÃO")[0].split("h")[1]
+            };
+        const duration:TimeMap = {
+            hours: this.aulas[index].attributes[5].value.split("DURAÇÃO:")[1].split('LOTAÇÃO')[0].split("h")[0],
+            minutes: this.aulas[index].attributes[5].value.split("DURAÇÃO:")[1].split('LOTAÇÃO')[0].split("h")[1]  === ' ' || '\n' ? "00" : this.aulas[index].attributes[5].value.split("DURAÇÃO:")[1].split('LOTAÇÃO')[0].split("h")[1]
+            };
+
+            console.log(this.aulas[index].attributes[5].value.split("INÍCIO:")[1].split("DURAÇÃO")[0].split("h"))
+            
+            const time = addTimes([inicio, duration])
+
         if(el[0] === "Segunda-Feira"){
-            table[0].children[0].innerHTML = '<p class="text-center">' +  el[1] + '</p>' + '<p class="text-center"><b>' + this.aulas[index].attributes[5].value.split("INÍCIO:")[1].split("DURAÇÃO")[0] + '- ' + (parseInt(this.aulas[index].attributes[5].value.split("INÍCIO:")[1].split("DURAÇÃO")[0]) + parseInt(this.aulas[index].attributes[5].value.split("DURAÇÃO:")[1].split('LOTAÇÃO')[0])) + 'h</b></p>'
+            table[0].children[0].innerHTML = '<p class="text-center">' +  el[1] + '</p>' + '<p class="text-center"><b>' + this.aulas[index].attributes[5].value.split("INÍCIO:")[1].split("DURAÇÃO")[0] + '- ' + time + '</b></p>'
         } else if(el[0] === "Terça-Feira"){
-            table[0].children[1].innerHTML = '<p class="text-center">' +  el[1] + '</p>' + '<p class="text-center"><b>' + this.aulas[index].attributes[5].value.split("INÍCIO:")[1].split("DURAÇÃO")[0] + '- ' + (parseInt(this.aulas[index].attributes[5].value.split("INÍCIO:")[1].split("DURAÇÃO")[0]) + parseInt(this.aulas[index].attributes[5].value.split("DURAÇÃO:")[1].split('LOTAÇÃO')[0])) + 'h</b></p>'
+            table[0].children[1].innerHTML = '<p class="text-center">' +  el[1] + '</p>' + '<p class="text-center"><b>' + this.aulas[index].attributes[5].value.split("INÍCIO:")[1].split("DURAÇÃO")[0] + '- ' + time + '</b></p>'
         } else if(el[0] === "Quarta-Feira"){
-            table[0].children[2].innerHTML = '<p class="text-center">' +  el[1] + '</p>' + '<p class="text-center"><b>' + this.aulas[index].attributes[5].value.split("INÍCIO:")[1].split("DURAÇÃO")[0] + '- ' + (parseInt(this.aulas[index].attributes[5].value.split("INÍCIO:")[1].split("DURAÇÃO")[0]) + parseInt(this.aulas[index].attributes[5].value.split("DURAÇÃO:")[1].split('LOTAÇÃO')[0])) + 'h</b></p>'
+            table[0].children[2].innerHTML = '<p class="text-center">' +  el[1] + '</p>' + '<p class="text-center"><b>' + this.aulas[index].attributes[5].value.split("INÍCIO:")[1].split("DURAÇÃO")[0] + '- ' + time + '</b></p>'
         } else if(el[0] === "Quinta-Feira"){
-            table[0].children[3].innerHTML = '<p class="text-center">' +  el[1] + '</p>' + '<p class="text-center"><b>' + this.aulas[index].attributes[5].value.split("INÍCIO:")[1].split("DURAÇÃO")[0] + '- ' + (parseInt(this.aulas[index].attributes[5].value.split("INÍCIO:")[1].split("DURAÇÃO")[0]) + parseInt(this.aulas[index].attributes[5].value.split("DURAÇÃO:")[1].split('LOTAÇÃO')[0])) + 'h</b></p>'
+            table[0].children[3].innerHTML = '<p class="text-center">' +  el[1] + '</p>' + '<p class="text-center"><b>' + this.aulas[index].attributes[5].value.split("INÍCIO:")[1].split("DURAÇÃO")[0] + '- ' + time + '</b></p>'
         } else if(el[0] === "Sexta-Feira"){
-            table[0].children[4].innerHTML = '<p class="text-center">' +  el[1] + '</p>' + '<p><b>' + this.aulas[index].attributes[5].value.split("INÍCIO:")[1].split("DURAÇÃO")[0] + '- ' + (parseInt(this.aulas[index].attributes[5].value.split("INÍCIO:")[1].split("DURAÇÃO")[0]) + parseInt(this.aulas[index].attributes[5].value.split("DURAÇÃO:")[1].split('LOTAÇÃO')[0])) + 'h</b></p>'
+            table[0].children[4].innerHTML = '<p class="text-center">' +  el[1] + '</p>' + '<p><b>' + this.aulas[index].attributes[5].value.split("INÍCIO:")[1].split("DURAÇÃO")[0] + '- ' + time + '</b></p>'
         }
     })
     };
