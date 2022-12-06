@@ -1,5 +1,5 @@
 //Requisitos:
-//Apresentar página com os dados pessoais do aluno com o seu histórico de notas (com média), situação de prescrição, horário, calendário de exames, Propinas, Operações num aside maybe!
+//Apresentar página com os dados pessoais do aluno com o seu histórico de notas (com média), situação de prescrição, calendário de exames, Propinas, Operações num aside maybe!
 
 interface DOMchanger {
     deleteBody: () => void;
@@ -38,6 +38,10 @@ const addTimes = function(timeMap: TimeMap[]) {
     }
 
     return totalH + "h" + totalM;
+}
+
+interface BufferAulas {
+    [key:string] : string[][]
 }
 
 class RenderSecVirtual implements DOMchanger {
@@ -159,79 +163,16 @@ class RenderSecVirtual implements DOMchanger {
                 </a>
               </li>
     
-              <li class="relative font-medium dropdown flex items-center p-4 cursor-pointer" name = "estudante">
-                <a class="mr-4">
-                  Estudante
-                </a> 
-                <svg class="inline w-6 h-6 text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path>
-                </svg>
-    
-                <div x-show="open" x-transition:enter.duration.500ms="" x-transition:leave.duration.800ms="" class="absolute w-48 py-2 mt-2 right-0 top-10 bg-gray-100 rounded-md shadow-xl" name = "listEstudante" style="display: none";>
-                        <a href="/matriculas/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-400 hover:text-white">
-                            Matr�culas Online
-                        </a>
-                        <a href="https://paco.ua.pt/Candidaturas" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-400 hover:text-white">
-                            Candidaturas
-                        </a>
-                        <a href="/M23/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-400 hover:text-white">
-                            Candidaturas M23
-                        </a>
-                        <a href="/M23TESP/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-400 hover:text-white">
-                        Candidaturas M23 - TESP
-                        </a>
-    
-                        <a href="/CandidaturasUA/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-400 hover:text-white">
-                        Candidaturas Cursos Livres
-                        </a>
-                    </div>
+              <li class="font-medium p-4 cursor-pointer hover:border-b-2 hover:border-cyan-50">
+                <a href="/secvirtual" class"mr-4 ">
+                  Secretaria Virtual
+                </a>
               </li>
-    
-              <li class="relative font-medium dropdown flex items-center p-4 cursor-pointer" name="docente">
-                <a class="mr-4">
-                  Docente
-                </a> 
-                
-                <svg class="inline w-6 h-6 text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path>
-                </svg>
-    
-                <div x-show="open" x-transition:enter.duration.500ms="" x-transition:leave.duration.800ms="" class="absolute w-48 py-2 mt-2 right-0 top-10 bg-gray-100 rounded-md shadow-xl" name = "listDocente" style="display: none";>
-                <a href="/disciplinas/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-400 hover:text-white">
-                    Disciplinas
+
+              <li class="font-medium p-4 cursor-pointer hover:border-b-2 hover:border-cyan-50">
+                <a href="/secvirtual" class"mr-4 ">
+                  Secretaria Virtual
                 </a>
-                <a href="/aulas/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-400 hover:text-white">
-                    Apoio �s Aulas
-                </a>
-                <a href="/DPUC/secure/UCList.aspx" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-400 hover:text-white">
-                    Dossi� Pedag�gico
-                </a>
-                <a href="/creditacoes/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-400 hover:text-white">
-                    Credita��es Online
-                </a>
-            </div>
-              </li>
-    
-              <li class="relative font-medium dropdown flex items-center p-4 cursor-pointer" name="secretaria">
-                <a class="mr-4">
-                  Secretaria
-                </a> 
-                
-                <svg class="inline w-6 h-6 text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path>
-                </svg>
-    
-                <div x-show="open" x-transition:enter.duration.500ms="" x-transition:leave.duration.800ms="" class="absolute w-48 py-2 mt-2 right-0 top-10 bg-gray-100 rounded-md shadow-xl" name = "listSecretaria" style="display: none";>
-                <a href="/dsd/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-400 hover:text-white">
-                    Distribui��o de Servi�o Docente
-                </a>
-                <a href="/secretariaDEP/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-400 hover:text-white">
-                    Apoio a Secretarias Departamentos
-                </a>
-                <a href="/horarios/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-400 hover:text-white">
-                    Hor�rios
-                </a>
-            </div>
               </li>
           </ul>
           
@@ -548,34 +489,78 @@ class RenderSecVirtual implements DOMchanger {
     //FAZER COM QUE ACRESCENTE TR E TD DINAMICAMENTE!!
     const table = this.LeftDiv.querySelectorAll("table > tbody > tr")
 
-    Object.values(this.ClassInfo).map((el, index) => {
-        console.log(el[0])
-        const inicio:TimeMap = {
-            hours: this.aulas[index].attributes[5].value.split("INÍCIO:")[1].split("DURAÇÃO")[0].split("h")[0],
-            minutes: this.aulas[index].attributes[5].value.split("INÍCIO:")[1].split("DURAÇÃO")[0].split("h")[1] === ' ' || '\n' ? "00" : this.aulas[index].attributes[5].value.split("INÍCIO:")[1].split("DURAÇÃO")[0].split("h")[1]
-            };
-        const duration:TimeMap = {
-            hours: this.aulas[index].attributes[5].value.split("DURAÇÃO:")[1].split('LOTAÇÃO')[0].split("h")[0],
-            minutes: this.aulas[index].attributes[5].value.split("DURAÇÃO:")[1].split('LOTAÇÃO')[0].split("h")[1]  === ' ' || '\n' ? "00" : this.aulas[index].attributes[5].value.split("DURAÇÃO:")[1].split('LOTAÇÃO')[0].split("h")[1]
-            };
+    const BufferAulas:BufferAulas = {
+        "Segunda-Feira": [],
+        "Terça-Feira": [],
+        "Quarta-Feira": [],
+        "Quinta-Feira": [],
+        "Sexta-Feira": []
+    }
 
-            console.log(this.aulas[index].attributes[5].value.split("INÍCIO:")[1].split("DURAÇÃO")[0].split("h"))
-            
-            const time = addTimes([inicio, duration])
+    Object.values(this.ClassInfo).map((el) => {
 
         if(el[0] === "Segunda-Feira"){
-            table[0].children[0].innerHTML = '<p class="text-center">' +  el[1] + '</p>' + '<p class="text-center"><b>' + this.aulas[index].attributes[5].value.split("INÍCIO:")[1].split("DURAÇÃO")[0] + '- ' + time + '</b></p>'
+            BufferAulas["Segunda-Feira"].push(el)
         } else if(el[0] === "Terça-Feira"){
-            table[0].children[1].innerHTML = '<p class="text-center">' +  el[1] + '</p>' + '<p class="text-center"><b>' + this.aulas[index].attributes[5].value.split("INÍCIO:")[1].split("DURAÇÃO")[0] + '- ' + time + '</b></p>'
+            BufferAulas["Terça-Feira"].push(el)
         } else if(el[0] === "Quarta-Feira"){
-            table[0].children[2].innerHTML = '<p class="text-center">' +  el[1] + '</p>' + '<p class="text-center"><b>' + this.aulas[index].attributes[5].value.split("INÍCIO:")[1].split("DURAÇÃO")[0] + '- ' + time + '</b></p>'
+            BufferAulas["Quarta-Feira"].push(el)
         } else if(el[0] === "Quinta-Feira"){
-            table[0].children[3].innerHTML = '<p class="text-center">' +  el[1] + '</p>' + '<p class="text-center"><b>' + this.aulas[index].attributes[5].value.split("INÍCIO:")[1].split("DURAÇÃO")[0] + '- ' + time + '</b></p>'
+            BufferAulas["Quinta-Feira"].push(el)
         } else if(el[0] === "Sexta-Feira"){
-            table[0].children[4].innerHTML = '<p class="text-center">' +  el[1] + '</p>' + '<p><b>' + this.aulas[index].attributes[5].value.split("INÍCIO:")[1].split("DURAÇÃO")[0] + '- ' + time + '</b></p>'
+            BufferAulas["Sexta-Feira"].push(el)
         }
     })
+    let classCount = 0
+    Object.values(BufferAulas).map((el) => {
+        if(el.length > 0){
+            el.map((el, index) => {
+                const inicio:TimeMap = {
+                    hours: this.aulas[classCount].attributes[5].value.split("INÍCIO:")[1].split("DURAÇÃO")[0].includes(",5") ? this.aulas[classCount].attributes[5].value.split("INÍCIO:")[1].split("DURAÇÃO")[0].split(",")[0] : this.aulas[classCount].attributes[5].value.split("INÍCIO:")[1].split("DURAÇÃO")[0].split("h")[0],
+        
+                    minutes: this.aulas[classCount].attributes[5].value.split("INÍCIO:")[1].split("DURAÇÃO")[0].includes(",5") ? "30" : "00"
+                    };
+        
+                const duration:TimeMap = {
+                    hours: this.aulas[classCount].attributes[5].value.split("DURAÇÃO:")[1].split('LOTAÇÃO')[0].includes(",5") ? this.aulas[classCount].attributes[5].value.split("DURAÇÃO:")[1].split('LOTAÇÃO')[0].split(",")[0]  : this.aulas[classCount].attributes[5].value.split("DURAÇÃO:")[1].split('LOTAÇÃO')[0].split("h")[0],
+        
+                    minutes: this.aulas[classCount].attributes[5].value.split("DURAÇÃO:")[1].split('LOTAÇÃO')[0].includes(",5") ? "30" : "00"
+                    };
+                    
+                    const time = addTimes([inicio, duration])
+
+                    let i = 0
+                    switch(el[0]){
+                        case "Segunda-Feira":
+                            i = 0
+                            break
+
+                        case "Terça-Feira":
+                            i = 1
+                            break
+
+                        case "Quarta-Feira":
+                            i = 2
+                            break
+
+                        case "Quinta-Feira":
+                            i = 3
+                            break
+
+                        case "Sexta-Feira":
+                            i = 4
+                            break
+                    }
+
+                table[index].children[i].innerHTML = '<p class="text-center">' +  el[1] + '</p>' + '<p class="text-center"><b>' + this.aulas[classCount].attributes[5].value.split("INÍCIO:")[1].split("DURAÇÃO")[0] + '- ' + time + '</b></p>'
+            })
+            classCount++
+        }
+    })
+
+
     };
+    
 
     appendElements: () => void = () => {
         this.header.appendChild(this.nav);

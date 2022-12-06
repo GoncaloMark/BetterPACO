@@ -10,6 +10,9 @@ type TimeMap = {
     "minutes": string;
 };
 declare const addTimes: (timeMap: TimeMap[]) => string;
+interface BufferAulas {
+    [key: string]: string[][];
+}
 declare class RenderSecVirtual implements DOMchanger {
     body: HTMLBodyElement;
     childLink: HTMLLinkElement;

@@ -5,6 +5,7 @@ interface DOMchanger {
   setListeners: () => void;
   appendElements: () => void;
 }
+//FAZER FUNÇÃO DE LOADING!!
 
 //Melhorar estes tipos pfv...
 
@@ -21,6 +22,7 @@ type Menu = {
 }
 
 //Fazer um type Avisos!!
+//FAZER NAV EM ESTILO COMPONENT EM QUE VERIFICA O URI PARA SABER SE TEM LOGIN FEITO, SE TIVER MOSTRA UM NAV SE NÃO MOSTRA OUTRO!!
 
 class RenderIndex implements DOMchanger {
   private body;

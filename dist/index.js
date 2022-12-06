@@ -1,5 +1,6 @@
 "use strict";
 //Fazer um type Avisos!!
+//FAZER NAV EM ESTILO COMPONENT EM QUE VERIFICA O URI PARA SABER SE TEM LOGIN FEITO, SE TIVER MOSTRA UM NAV SE NÃO MOSTRA OUTRO!!
 var RenderIndex = /** @class */ (function () {
     function RenderIndex() {
         var _this = this;
