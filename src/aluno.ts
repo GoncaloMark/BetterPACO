@@ -552,9 +552,11 @@ class RenderSecVirtual implements DOMchanger {
                             break
                     }
 
-                table[index].children[i].innerHTML = '<p class="text-center">' +  el[1] + '</p>' + '<p class="text-center"><b>' + this.aulas[classCount].attributes[5].value.split("INÍCIO:")[1].split("DURAÇÃO")[0] + '- ' + time + '</b></p>'
+                table[index].children[i].innerHTML = '<p class="text-center">' +  el[1] + '</p>' + '<p class="text-center"><b>' + (this.aulas[classCount].attributes[5].value.split("INÍCIO:")[1].split("DURAÇÃO")[0].includes(",5") ? this.aulas[classCount].attributes[5].value.split("INÍCIO:")[1].split("DURAÇÃO")[0].split(",")[0] + "h30" : this.aulas[classCount].attributes[5].value.split("INÍCIO:")[1].split("DURAÇÃO")[0].split("h")[0]+"h ") + '- ' + time + '</b></p>'
+
+                classCount++
             })
-            classCount++
+            
         }
     })
 
@@ -634,7 +636,7 @@ class TableDadosParser {
                     } else if(title.value.includes(dias[1])){
                         this.classInfo["Aula"+index] = ["Terça-Feira", el.textContent?.split("(")[0].split("\n")[1] as string];
                     } else if(title.value.includes(dias[2])){
-                        this.classInfo["Aula"+index] = ["quarta-Feira", el.textContent?.split("(")[0].split("\n")[1] as string];
+                        this.classInfo["Aula"+index] = ["Quarta-Feira", el.textContent?.split("(")[0].split("\n")[1] as string];
                     } else if(title.value.includes(dias[3])){
                         this.classInfo["Aula"+index] = ["Quinta-Feira", el.textContent?.split("(")[0].split("\n")[1] as string];
                     } else if(title.value.includes(dias[4])){

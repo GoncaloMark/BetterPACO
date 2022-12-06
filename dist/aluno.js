@@ -134,9 +134,9 @@ var RenderSecVirtual = /** @class */ (function () {
                                 i = 4;
                                 break;
                         }
-                        table[index].children[i].innerHTML = '<p class="text-center">' + el[1] + '</p>' + '<p class="text-center"><b>' + _this.aulas[classCount].attributes[5].value.split("INÍCIO:")[1].split("DURAÇÃO")[0] + '- ' + time + '</b></p>';
+                        table[index].children[i].innerHTML = '<p class="text-center">' + el[1] + '</p>' + '<p class="text-center"><b>' + (_this.aulas[classCount].attributes[5].value.split("INÍCIO:")[1].split("DURAÇÃO")[0].includes(",5") ? _this.aulas[classCount].attributes[5].value.split("INÍCIO:")[1].split("DURAÇÃO")[0].split(",")[0] + "h30" : _this.aulas[classCount].attributes[5].value.split("INÍCIO:")[1].split("DURAÇÃO")[0].split("h")[0] + "h ") + '- ' + time + '</b></p>';
+                        classCount++;
                     });
-                    classCount++;
                 }
             });
         };
@@ -215,7 +215,7 @@ var TableDadosParser = /** @class */ (function () {
                 _this.classInfo["Aula" + index] = ["Terça-Feira", (_b = el.textContent) === null || _b === void 0 ? void 0 : _b.split("(")[0].split("\n")[1]];
             }
             else if (title.value.includes(dias[2])) {
-                _this.classInfo["Aula" + index] = ["quarta-Feira", (_c = el.textContent) === null || _c === void 0 ? void 0 : _c.split("(")[0].split("\n")[1]];
+                _this.classInfo["Aula" + index] = ["Quarta-Feira", (_c = el.textContent) === null || _c === void 0 ? void 0 : _c.split("(")[0].split("\n")[1]];
             }
             else if (title.value.includes(dias[3])) {
                 _this.classInfo["Aula" + index] = ["Quinta-Feira", (_d = el.textContent) === null || _d === void 0 ? void 0 : _d.split("(")[0].split("\n")[1]];
