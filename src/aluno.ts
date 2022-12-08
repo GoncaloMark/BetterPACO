@@ -56,6 +56,7 @@ class RenderSecVirtual implements DOMchanger {
     content;
     aulas;
     ClassInfo;
+    dummyTimer;
 
     constructor(content: Dados, aulas:NodeListOf<Element>, dias:Classes){
         this.body = document.body as HTMLBodyElement;
@@ -65,6 +66,7 @@ class RenderSecVirtual implements DOMchanger {
         this.header = document.createElement("header") as HTMLElement;
         this.section = document.createElement("section") as HTMLElement;
         this.LeftDiv = document.createElement("div") as HTMLElement;
+        this.dummyTimer = document.createElement("span") as HTMLElement;
         this.dadosContent = {};
         this.content = content;
         this.aulas = aulas;
@@ -77,6 +79,8 @@ class RenderSecVirtual implements DOMchanger {
 
 
         this.appendElements();
+
+        this.setListeners();
     };
 
     deleteBody: () => void = () => {
@@ -87,8 +91,10 @@ class RenderSecVirtual implements DOMchanger {
         this.body.className = `bg-sky-100`;
         this.nav.className = `relative w-full flex flex-wrap items-center justify-between bg-blue-600 py-4 text-yellow-50 hover:text-gray-700 focus:text-gray-700 shadow-lg navbar navbar-expand-lg navbar-light`;
         this.footer.className = `container-fluid w-full flex flex-wrap items-center px-6 h-fit bg-blue-600 justify-left`;
-        this.section.className = `block h-fit mt-10 mb-10 flow-root w-full`;
-        this.LeftDiv.className = `flex flex-row w-full`;
+        this.section.className = `block h-fit mt-10 mb-10 flow-root w-full flex justify-center mx-auto`;
+        this.LeftDiv.className = `flex flex-row w-full justify-center`;
+        this.dummyTimer.setAttribute("id", "divInformacaoTimeout")
+        this.dummyTimer.className = `hidden`
     };
 
     setInnerHTML: () => void = () => {
@@ -237,245 +243,245 @@ class RenderSecVirtual implements DOMchanger {
 
         
                 <div class="overflow-x-hidden relative my-4 mx-auto w-2/5 rounded-lg ">
-                    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400 shadow-md rounded-lg border-collapse border border-slate-400">
-                        <thead class="text-xs text-gray-700 uppercase dark:text-gray-400">
+                    <table class="w-full text-sm text-left text-gray-500 shadow-md rounded-lg border-collapse border border-slate-400">
+                        <thead class="text-xs text-gray-700 uppercase ">
                             <tr>
-                                <th scope="col" class="py-3 px-6 bg-gray-50 dark:bg-gray-800 border border-slate-300">
+                                <th scope="col" class="py-3 px-6 bg-gray-50  border border-slate-300">
                                     Segunda-Feira
                                 </th>
-                                <th scope="col" class="py-3 px-6 bg-gray-50 dark:bg-gray-800 border border-slate-300">
+                                <th scope="col" class="py-3 px-6 bg-gray-50  border border-slate-300">
                                     Terça-Feira
                                 </th>
-                                <th scope="col" class="py-3 px-6 bg-gray-50 dark:bg-gray-800 border border-slate-300">
+                                <th scope="col" class="py-3 px-6 bg-gray-50  border border-slate-300">
                                     Quarta-Feira
                                 </th>
-                                <th scope="col" class="py-3 px-6 bg-gray-50 dark:bg-gray-800 border border-slate-300">
+                                <th scope="col" class="py-3 px-6 bg-gray-50  border border-slate-300">
                                     Quinta-Feira
                                 </th>
-                                <th scope="col" class="py-3 px-6 bg-gray-50 dark:bg-gray-800 border border-slate-300">
-                                    Sexta-Feira
+                                <th scope="col" class="py-3 px-6 bg-gray-50  border border-slate-300">
+                                Sexta-Feira
                                 </th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr class="border-b border border-slate-300 dark:border-gray-700 ">
-                                <td scope="row" class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                            <tr class="border-b border border-slate-300 ">
+                                <td scope="row" class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 ">
                                     
                                 </td>
                                 
-                                <td class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                                <td class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 ">
                                     
                                 </td>
-                                <td class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                                <td class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 ">
                                     
                                 </td>
-                                <td class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                                <td class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 ">
                                     
                                 </td>
-                                <td class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                                <td class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 ">
                                     
                                 </td>
-                                
-                            </tr>
-                            <tr class="border-b border border-slate-300 dark:border-gray-700">
-                                <td scope="row" class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
-                                    
-                                </td>
-                                <td class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
-                                    
-                                </td>
-                                <td class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
-                                    
-                                </td>
-                                <td class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
-                                    
-                                </td>
-                                <td class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
-                                    
                                 
                             </tr>
-                            <tr class=" border border-slate-300 dark:border-gray-700">
-                                <td scope="row" class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                            <tr class="border-b border border-slate-300 ">
+                                <td scope="row" class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 ">
                                     
                                 </td>
-                                <td class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                                <td class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 ">
                                     
                                 </td>
-                                <td class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                                <td class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 ">
                                     
                                 </td>
-                                <td class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                                <td class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 ">
                                     
                                 </td>
-                                <td class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                                <td class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 ">
                                     
                                 
                             </tr>
-                            <tr class="border border-slate-300 dark:border-gray-700">
-                                <td scope="row" class="py-4 flex-col px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                            <tr class=" border border-slate-300 ">
+                                <td scope="row" class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 ">
                                     
                                 </td>
-                                <td class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                                <td class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 ">
                                     
                                 </td>
-                                <td class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                                <td class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 ">
                                     
                                 </td>
-                                <td class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                                <td class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 ">
                                     
                                 </td>
-                                <td class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                                <td class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 ">
+                                    
+                                
+                            </tr>
+                            <tr class="border border-slate-300 ">
+                                <td scope="row" class="py-4 flex-col px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 ">
+                                    
+                                </td>
+                                <td class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 ">
+                                    
+                                </td>
+                                <td class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 ">
+                                    
+                                </td>
+                                <td class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 ">
+                                    
+                                </td>
+                                <td class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 ">
                                     
                                 </td>
                                 
                             </tr>
                             <tr>
-                                <td scope="row" class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                                <td scope="row" class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 ">
                                     
                                 </td>
-                                <td class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                                <td class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 ">
                                     
                                 </td>
-                                <td class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                                <td class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 ">
                                     
                                 </td>
-                                <td class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                                <td class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 ">
                                     
                                 </td>
-                                <td class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
-                                    
-                                </td>
-                                
-                            </tr>
-                            <tr class="border-b border border-slate-300 dark:border-gray-700 ">
-                                <td scope="row" class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
-                                    
-                                </td>
-                                
-                                <td class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
-                                    
-                                </td>
-                                <td class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
-                                    
-                                </td>
-                                <td class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
-                                    
-                                </td>
-                                <td class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                                <td class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 ">
                                     
                                 </td>
                                 
                             </tr>
-                            <tr class="border-b border border-slate-300 dark:border-gray-700 ">
-                                <td scope="row" class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                            <tr class="border-b border border-slate-300  ">
+                                <td scope="row" class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 ">
                                     
                                 </td>
                                 
-                                <td class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                                <td class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 ">
                                     
                                 </td>
-                                <td class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                                <td class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 ">
                                     
                                 </td>
-                                <td class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                                <td class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 ">
                                     
                                 </td>
-                                <td class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
-                                    
-                                </td>
-                                
-                            </tr>
-                            <tr class="border-b border border-slate-300 dark:border-gray-700 ">
-                                <td scope="row" class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
-                                    
-                                </td>
-                                
-                                <td class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
-                                    
-                                </td>
-                                <td class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
-                                    
-                                </td>
-                                <td class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
-                                    
-                                </td>
-                                <td class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                                <td class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 ">
                                     
                                 </td>
                                 
                             </tr>
-                            <tr class="border-b border border-slate-300 dark:border-gray-700 ">
-                                <td scope="row" class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                            <tr class="border-b border border-slate-300  ">
+                                <td scope="row" class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 ">
                                     
                                 </td>
                                 
-                                <td class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                                <td class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 ">
                                     
                                 </td>
-                                <td class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                                <td class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 ">
                                     
                                 </td>
-                                <td class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                                <td class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 ">
                                     
                                 </td>
-                                <td class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
-                                    
-                                </td>
-                                
-                            </tr>
-                            <tr class="border-b border border-slate-300 dark:border-gray-700 ">
-                                <td scope="row" class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
-                                    
-                                </td>
-                                
-                                <td class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
-                                    
-                                </td>
-                                <td class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
-                                    
-                                </td>
-                                <td class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
-                                    
-                                </td>
-                                <td class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                                <td class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 ">
                                     
                                 </td>
                                 
                             </tr>
-                            <tr class="border-b border border-slate-300 dark:border-gray-700 ">
-                                <td scope="row" class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                            <tr class="border-b border border-slate-300 ">
+                                <td scope="row" class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 ">
                                     
                                 </td>
                                 
-                                <td class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                                <td class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 ">
                                     
                                 </td>
-                                <td class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                                <td class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 ">
                                     
                                 </td>
-                                <td class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                                <td class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 ">
                                     
                                 </td>
-                                <td class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                                <td class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 ">
                                     
                                 </td>
                                 
                             </tr>
-                            <tr class="border-b border border-slate-300 dark:border-gray-700 ">
-                                <td scope="row" class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                            <tr class="border-b border border-slate-300 ">
+                                <td scope="row" class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 ">
                                     
                                 </td>
                                 
-                                <td class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                                <td class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 ">
                                     
                                 </td>
-                                <td class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                                <td class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 ">
                                     
                                 </td>
-                                <td class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                                <td class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 ">
                                     
                                 </td>
-                                <td class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                                <td class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 ">
+                                    
+                                </td>
+                                
+                            </tr>
+                            <tr class="border-b border border-slate-300 ">
+                                <td scope="row" class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 ">
+                                    
+                                </td>
+                                
+                                <td class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 ">
+                                    
+                                </td>
+                                <td class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 ">
+                                    
+                                </td>
+                                <td class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 ">
+                                    
+                                </td>
+                                <td class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 ">
+                                    
+                                </td>
+                                
+                            </tr>
+                            <tr class="border-b border border-slate-300  ">
+                                <td scope="row" class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50">
+                                    
+                                </td>
+                                
+                                <td class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 ">
+                                    
+                                </td>
+                                <td class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 ">
+                                    
+                                </td>
+                                <td class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 ">
+                                    
+                                </td>
+                                <td class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 ">
+                                    
+                                </td>
+                                
+                            </tr>
+                            <tr class="border-b border border-slate-300">
+                                <td scope="row" class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 ">
+                                    
+                                </td>
+                                
+                                <td class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 ">
+                                    
+                                </td>
+                                <td class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 ">
+                                    
+                                </td>
+                                <td class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 ">
+                                    
+                                </td>
+                                <td class="border border-slate-300 flex-col py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 ">
                                     
                                 </td>
                                 
@@ -568,11 +574,20 @@ class RenderSecVirtual implements DOMchanger {
         this.header.appendChild(this.nav);
         this.body.appendChild(this.header);
         this.section.appendChild(this.LeftDiv);
-        this.nav.after(this.section);
+        this.body.appendChild(this.section);
+        this.body.appendChild(this.dummyTimer)
     };
 
     setListeners: () => void = () => {
-        
+        //MUDAR ESTE OBSERVER PARA O BODY E DETETAR QUANDO ESTA DIV SÓ APARECE LÁ!
+        const observer = new MutationObserver((mutations) => {
+            if(this.dummyTimer.textContent?.includes("1.59")){
+                const button = document.getElementsByClassName("jqSessionAlerterButton reset")[0] as HTMLElement;
+                button.click();
+            }
+        })
+        const element = document.body.querySelector("span#divInformacaoTimeout") as Node;
+        observer.observe(element, {characterData: true, childList: true, attributes: true, subtree: true })
     };
 };
 

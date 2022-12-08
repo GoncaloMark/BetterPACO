@@ -23,6 +23,7 @@ type Menu = {
 
 //Fazer um type Avisos!!
 //FAZER NAV EM ESTILO COMPONENT EM QUE VERIFICA O URI PARA SABER SE TEM LOGIN FEITO, SE TIVER MOSTRA UM NAV SE NÃO MOSTRA OUTRO!!
+//Fazer Dummy Timer universal para que não tenha de o copiar entre páginas!
 
 class RenderIndex implements DOMchanger {
   private body;
@@ -35,6 +36,7 @@ class RenderIndex implements DOMchanger {
   private section;
   private article;
   private heading;
+  private dummyTimer;
   readonly avisos;
   readonly buttons:EVT;
   readonly menu:Menu;
@@ -52,6 +54,7 @@ class RenderIndex implements DOMchanger {
     this.section = document.createElement("section") as HTMLElement;
     this.article = document.createElement("article") as HTMLElement;
     this.heading = document.createElement("h1") as HTMLElement;
+    this.dummyTimer = document.createElement("span") as HTMLElement;
     this.avisos = [
       {
         Title1: this.arrInfo[0].querySelector('div[class="title"]')?.innerHTML as string,
@@ -105,6 +108,8 @@ class RenderIndex implements DOMchanger {
     this.heading.className = `text-slate-700 text-2xl bold mb-5`;
     this.nav.className = `relativew-fullflex flex-wrap items-center justify-between bg-blue-600 py-4 text-yellow-50 hover:text-gray-700 focus:text-gray-700 shadow-lg navbar navbar-expand-lg navbar-light`;
     this.section.className = `block mx-auto h-fit w-4/6 mt-10 mb-10`;
+    this.dummyTimer.setAttribute("id", "divInformacaoTimeout")
+    this.dummyTimer.className = `hidden`
   }
 
   setInnerHTML: () => void = () => {
@@ -289,6 +294,7 @@ class RenderIndex implements DOMchanger {
     this.section.appendChild(this.article);
     this.body.appendChild(this.section);
     this.section.after(this.footer);
+    this.body.appendChild(this.dummyTimer)
   }
 
   setListeners: () => void = () => {
@@ -300,8 +306,19 @@ class RenderIndex implements DOMchanger {
 
     this.buttons.buttonSecretaria.onmouseover = () => this.menu.menuSecretaria.style.display = "block";
     this.buttons.buttonSecretaria.onmouseleave = () => this.menu.menuSecretaria.style.display = "none";
+
+    const observer = new MutationObserver((mutations) => {
+      if(this.dummyTimer.textContent?.includes("1.59")){
+          const button = document.getElementsByClassName("jqSessionAlerterButton reset")[0] as HTMLElement;
+          button.click();
+      }
+  })
+  const element = document.body.querySelector("span#divInformacaoTimeout") as Node;
+  observer.observe(element, {characterData: true, childList: true, attributes: true, subtree: true })
   }
 
 }
 
 new RenderIndex();
+
+

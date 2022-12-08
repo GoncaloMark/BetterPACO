@@ -25,6 +25,7 @@ declare class RenderSecVirtual implements DOMchanger {
     content: Dados;
     aulas: NodeListOf<Element>;
     ClassInfo: Classes;
+    dummyTimer: HTMLElement;
     constructor(content: Dados, aulas: NodeListOf<Element>, dias: Classes);
     deleteBody: () => void;
     setClasses: () => void;

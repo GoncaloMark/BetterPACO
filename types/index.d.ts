@@ -26,6 +26,7 @@ declare class RenderIndex implements DOMchanger {
     private section;
     private article;
     private heading;
+    private dummyTimer;
     readonly avisos: ({
         Title1: string;
         Text1: string;
